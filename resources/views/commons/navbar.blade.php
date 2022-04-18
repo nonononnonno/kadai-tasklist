@@ -11,10 +11,15 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 <ul class="navbar-nav">
-                    {{-- ユーザ登録ページへのリンク --}}
-                    <li>{!! link_to_route('signup.get', 'とうろく', [], ['class' => 'nav-link']) !!}</li>
-                    {{-- ログインページへのリンク --}}
-                    <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
+                    {{--Auth::check()はユーザがログインしているかどうかを調べるための関数--}}
+                    @if (Auth::check())
+                        <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                    @else
+                        {{-- ユーザ登録ページへのリンク --}}
+                        <li>{!! link_to_route('signup.get', 'とうろく', [], ['class' => 'nav-link']) !!}</li>
+                        {{-- ログインページへのリンク --}}
+                        <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
+                    @endif
                 </ul>
                 {{--<li class="nav-item">{!! link_to_route('tasks.create', 'あたらしいたすく', [], ['class' => 'nav-link']) !!}</li>--}}
             </ul>
