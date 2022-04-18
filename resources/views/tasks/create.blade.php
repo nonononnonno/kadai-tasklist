@@ -19,6 +19,10 @@
                     {{-- 第三引数はタグの属性情報を配列形式で --}}
                     {!! Form::text('content', null, ['class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('status', 'すてーたす:') !!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                </div>
 
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
 

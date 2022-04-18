@@ -13,6 +13,10 @@
                     {!! Form::label('content', 'たすく:') !!}
                     {!! Form::text('content', null, ['class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('status', 'すてーたす:') !!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                </div>
 
                 {!! Form::submit('こうしん', ['class' => 'btn btn-primary']) !!}
 

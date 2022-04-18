@@ -33,16 +33,19 @@ class TasksController extends Controller
         ]);
     }
 
-    // postでtasks/にアクセスされた場合の「新規登録処理」
+    // postでtasks/にアクセスされた場合の「新規登録処理」create.blade.php
     //Laravelでの「Request」は、ブラウザを通してユーザから贈られる情報をすべて含んでいるオブジェクト
     public function store(Request $request)
     {
         //バリデーションのための記述
         $request->validate([
+            'status' => 'required|max:255',
             'content' => 'required|max:255',
         ]);
         
         $task = new Task;
+        //$request->statusは受信するリクエストに含まれる「Status」の値を取得している。それをcreate.blade.phpにある$taskのcontentに代入
+        $task->status = $request->status;
         //$taskの
         $task->content = $request->content;
         $task->save();
@@ -74,15 +77,16 @@ class TasksController extends Controller
         ]);
     }
 
-    // putまたはpatchでtasks/（任意のid）にアクセスされた場合の「更新処理」
+    // putまたはpatchでtasks/（任意のid）にアクセスされた場合の「更新処理」edit.blade.php
     public function update(Request $request, $id)
     {
         $request->validate([
+            'status' => 'required|max:255',
             'content' => 'required|max:255',
         ]);
         
         $task = Task::findOrFail($id);
-        
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         
