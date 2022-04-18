@@ -15,6 +15,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    //通常はsave()のように1つずつしかデータを代入できない
+    //create()は一気にデータを保存できるけど、デフォルトではセキュリティ上「できない」とされている
+    //そこで、$fillableで一気に保存可能なパラメータ（ここでは下の3つ）を指定する
     protected $fillable = [
         'name', 'email', 'password',
     ];

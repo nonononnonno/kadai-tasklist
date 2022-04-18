@@ -29,3 +29,9 @@ Route::resource('tasks', 'TasksController');
 
 //更新用のフォームページ
 // Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');
+
+
+// ユーザ登録(path, Controller名@アクション名)
+//->nam()は、名前を付けているだけ。
+Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
+Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');

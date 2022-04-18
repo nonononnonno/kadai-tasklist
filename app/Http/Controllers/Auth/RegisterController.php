@@ -29,6 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    //ログイン状態になったら、HOMEへリダイレクトされる。ここのHOMEはRouteServiceProvider.phpで定義されている
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -38,6 +39,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        //ゲストにだけユーザ登録やログインを実行させるため
+        //ログインしていない閲覧者（＝guest）はそのまま実行させ、ログインしている場合は別のURLへ飛ばす
+        //guestは、エイリアス（ニックネームみたいな）によって定義されている。
         $this->middleware('guest');
     }
 
@@ -49,6 +53,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        //ここValidatorの設定をする。L15.6.3
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -64,6 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //ここのcreateは、Userを新規作成しているメソッド。新規登録画面などのcreateではない。
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

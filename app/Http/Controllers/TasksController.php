@@ -13,8 +13,10 @@ class TasksController extends Controller
     // getでtasks/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        //Taskモデルからメッセージ一覧を取得し$taskに代入
-        $tasks = Task::all();
+        //Taskモデルからメッセージ一覧を取得し$taskに代入↓
+        //$tasks = Task::all();
+        //ページネーションしたい場合は↓
+        $tasks = Task::paginate(25);
         //tasksフォルダのindex.blade.phpにあるtasksに$tasksを代入＝メッセージ一覧を表示
         //左辺の'tasks'はViewで呼び出すための変数名
         return view('tasks.index', [

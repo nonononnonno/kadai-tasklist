@@ -12,6 +12,7 @@
                 <tr>
                     <th>id</th>
                     <th>たすく</th>
+                    <th>すてーたす</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,8 @@
             </tbody>
         </table>
     @endif
+    {{-- ページネーションのリンク --}}
+    {{ $tasks->links() }}
     {{-- ('ルーティング', 'リンクにしたい文字列', 'URLにしたい値', 'HTMLタグの属性')--}}
     {!! link_to_route('tasks.create', 'あたらしいたすく', [], ['class' => 'btn btn-primary']) !!}
 @endsection
