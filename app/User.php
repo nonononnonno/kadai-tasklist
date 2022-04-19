@@ -39,4 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //Userが持つTaskは複数存在するため、tasksのように複数形でメソッドを定義
+    //ここは、TaskモデルとUserモデルのつながりを定義している
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
+    //ユーザに関するモデルの件数をカウント
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('tasks');
+    }
 }

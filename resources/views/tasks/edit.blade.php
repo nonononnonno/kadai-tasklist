@@ -7,7 +7,6 @@
     <div class="row">
         <div class="col-6">
             {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
-
                 <div class="form-group">
                     {{--下記contentにはControllerのfindOrFail($id)で取得されるcontentが最初から入っている--}}
                     {!! Form::label('content', 'たすく:') !!}

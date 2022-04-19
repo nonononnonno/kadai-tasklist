@@ -39,10 +39,15 @@ class TasksController extends Controller
     //Laravelでの「Request」は、ブラウザを通してユーザから贈られる情報をすべて含んでいるオブジェクト
     public function store(Request $request)
     {
+        //dd($request);
         //バリデーションのための記述
         $request->validate([
             'status' => 'required|max:255',
             'content' => 'required|max:255',
+        ]);
+        
+        $request->user()->tasks()->create([
+            'content' => $request->content,    
         ]);
         
         $task = new Task;
@@ -50,6 +55,7 @@ class TasksController extends Controller
         $task->status = $request->status;
         //$taskの
         $task->content = $request->content;
+        $task->user_id = $request->user_id;
         $task->save();
         
         //最後にトップページ（＝index.blade.php）にリダイレクトさせる。
@@ -90,6 +96,7 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         $task->status = $request->status;
         $task->content = $request->content;
+        $task->user_id = $request->user_id;
         $task->save();
         
         return redirect('/');

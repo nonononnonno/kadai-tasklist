@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
 
-            {{--下記の'signup.post'がルーティングで指定されている。つまり、register()アクションに送信される--}}
+            {{--下記の'signup.post'がルーティングで指定されている。--}}
+            {{--web.php上で指定されたsignup.postというアクション属性へ送信される--}}
             {!! Form::open(['route' => 'signup.post']) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Name') !!}

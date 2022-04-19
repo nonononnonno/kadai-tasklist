@@ -8,6 +8,7 @@
         <div class="col-6">
             {{-- $taskはControllerのcreate()でインスタンス化したTaskモデルを代入した変数 --}}
             {{-- 'route' => 'tasks.store'はformタグのaction属性の設定。ここではPOSTメソッドのフォームを受け取って処理するstoreアクション --}}
+            @if (Auth::id() == $user->id)
             {!! Form::model($task, ['route' => 'tasks.store']) !!}
 
                 <div class="form-group">
@@ -27,6 +28,7 @@
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
 
             {!! Form::close() !!}
+            @endif
         </div>
     </div>
 @endsection
