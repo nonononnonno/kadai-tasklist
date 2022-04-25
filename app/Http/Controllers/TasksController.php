@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 //これでAppフォルダのTaskモデルを
 use App\Task;
-
 class TasksController extends Controller
 
 {
@@ -16,7 +15,7 @@ class TasksController extends Controller
         //Taskモデルからメッセージ一覧を取得し$taskに代入↓
         //$tasks = Task::all();
         //ページネーションしたい場合は↓
-        $tasks = Task::paginate(25);
+        $tasks = Task::where('user_id', Auth::id())->paginate(25);
         //tasksフォルダのindex.blade.phpにあるtasksに$tasksを代入＝メッセージ一覧を表示
         //左辺の'tasks'はViewで呼び出すための変数名
         return view('tasks.index', [
@@ -29,9 +28,11 @@ class TasksController extends Controller
     {
         //Taskモデルのためのフォームだから、その入力項目のために、$taskインスタンスを作る。
         $task = new Task;
+        $user = \Auth::user();
         //左辺の'task'はViewで呼び出すための変数名。単数形なのは、index()と違ってここでは一つしか使わないから。
         return view('tasks.create', [
-            'task' => $task,    
+            'task' => $task, 
+            'user' => $user, 
         ]);
     }
 
@@ -39,15 +40,11 @@ class TasksController extends Controller
     //Laravelでの「Request」は、ブラウザを通してユーザから贈られる情報をすべて含んでいるオブジェクト
     public function store(Request $request)
     {
-        //dd($request);
+        // dd($request);
         //バリデーションのための記述
         $request->validate([
             'status' => 'required|max:255',
             'content' => 'required|max:255',
-        ]);
-        
-        $request->user()->tasks()->create([
-            'content' => $request->content,    
         ]);
         
         $task = new Task;
@@ -55,7 +52,7 @@ class TasksController extends Controller
         $task->status = $request->status;
         //$taskの
         $task->content = $request->content;
-        $task->user_id = $request->user_id;
+        $task->user_id = Auth::id();
         $task->save();
         
         //最後にトップページ（＝index.blade.php）にリダイレクトさせる。
@@ -96,7 +93,7 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         $task->status = $request->status;
         $task->content = $request->content;
-        $task->user_id = $request->user_id;
+        $task->user_id = Auth::id();
         $task->save();
         
         return redirect('/');
