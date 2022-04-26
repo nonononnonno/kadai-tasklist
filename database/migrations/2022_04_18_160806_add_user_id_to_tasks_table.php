@@ -16,7 +16,7 @@ class AddUserIdToTasksTable extends Migration
         Schema::table('tasks', function (Blueprint $table) {
             $table->string('user_id');
             //foreign(外部キー制約を設定するカラム名)->references(参照されるカラム名)->on(参照されるテーブル名);
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

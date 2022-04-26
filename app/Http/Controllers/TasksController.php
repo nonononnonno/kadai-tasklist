@@ -43,7 +43,7 @@ class TasksController extends Controller
         // dd($request);
         //バリデーションのための記述
         $request->validate([
-            'status' => 'required|max:255',
+            'status' => 'required|max:10',
             'content' => 'required|max:255',
         ]);
         
@@ -86,7 +86,7 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|max:255',
+            'status' => 'required|max:10',
             'content' => 'required|max:255',
         ]);
         
