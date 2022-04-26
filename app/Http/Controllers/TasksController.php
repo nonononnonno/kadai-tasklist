@@ -65,8 +65,8 @@ class TasksController extends Controller
     {
         // idの値でタスクを検索して取得（findOrFailは、findとは違いレコードが存在しないときに404エラーを出す。）
         $task = Task::findOrFail($id);
-        //tasksフォルダのsho.blade.phpにあるtaskに$taskを代入＝該当idのタスク詳細を表示
-        //左辺の'task'はViewで呼び出すための変数名
+        //tasksフォルダのshow.blade.phpにあるtaskに$taskを代入＝該当idのタスク詳細を表示
+        //左辺の'task'はViewで呼び出すための変数名　そのキーに上で定義した$taskの値を割り当てる
         return view('tasks.show', [
             'task' => $task,
         ]);

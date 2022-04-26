@@ -1,5 +1,7 @@
+{{--この$tasksはControllerの'tasks'--}}
 @if (count($tasks) > 0)
     <ul class="list-unstyled">
+        {{--$tasksのデータを$taskとして1つずつ取り出す--}}
         @foreach ($tasks as $task)
             <li class="media mb-3">
                 <div class="media-body">

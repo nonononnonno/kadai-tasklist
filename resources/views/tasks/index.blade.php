@@ -21,6 +21,9 @@
                 <tr>
                     {{--$taskにテーブルのidカラムを表示--}}
                     {{-- メッセージ詳細ページへのリンク --}}
+                    <!--第一引数：ルーティング-->
+                    <!--第二引数：$taskからidを取りだす-->
+                    <!--第三引数：taskというキーに、$taskのidを指定する。-->
                     <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
                     <td>{{ $task->content }}</td>
                     <td>{{ $task->status }}</td>
