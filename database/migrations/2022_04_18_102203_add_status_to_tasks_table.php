@@ -15,7 +15,7 @@ class AddStatusToTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             //カラムを追加するための記述
-            $table->string('status', 10);
+            $table->text('status', 10);
         });
     }
 

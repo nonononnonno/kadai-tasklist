@@ -6,9 +6,7 @@ Route::get('/', 'TasksController@index');
 //     return view('welcome');
 // });
 
-//下記の7つのルーティングをまとめたもの
-Route::resource('tasks', 'TasksController');
-
+//Route::resource('tasks', 'TasksController');は、下記の7つのルーティングをまとめたもの
 // tasks/{id}というURLに対してgetのリクエストを送るid = 1のTaskを表示する, Controller名@アクション名
 // タスクの詳細ページ表示
 // Route::get('tasks/{id}', 'TasksController@show');
@@ -44,4 +42,5 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     Route::resource('tasks', 'TasksController', ['only' => ['store', 'destroy']]);
+    Route::resource('tasks', 'TasksController');
 });
